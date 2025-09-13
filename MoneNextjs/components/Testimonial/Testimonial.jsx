@@ -1,50 +1,41 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import "swiper/css/navigation";
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
 import { testimonialData } from './TestimonialData';
 
 const Testimonial = () => {
-    return (
-        <div id="testimonial" className="section">
-            <div className="container">
-                <Swiper
-                    slidesPerView={1}
-                    spaceBetween={40}
-                    autoplay={{
-                        delay: 2500,
-                        disableOnInteraction: false,
-                    }}
-                    pagination={{
-                        type: 'progressbar',
-                    }}
-                    modules={[Pagination]}
-                    className="testimonial-slider"
-                >
+  const data = testimonialData.mainData;
 
-                    {testimonialData.testimonial.map((item, index) => (
-                        <SwiperSlide key={index}>
-                            <div className="testimonial-box">
-                                <div className="testimonial-avatar">
-                                    <Image src={item.avatar} alt={item.name} placeholder="blur" />
-                                </div>
-                                <div className="testimonial-content">
-                                    <div className="mb-3">
-                                        <h3>{item.name}</h3>
-                                        <span className="sm-heading text-white">{item.jobTitle}</span>
-                                    </div>
-                                    <p className="fs-4 fw-normal fst-italic line-height-140">{item.description}</p>
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-            </div>
+  return (
+    <div id="about" className="section">
+      <div className="container">
+        <div className="row g-4 g-xl-5 align-items-center about-box">
+          {/* Left: Text */}
+          <div className="col-12 col-xl-6 order-1 order-xl-1">
+            {data.headingEyebrow && (
+              <span className="title-heading text-white-04">{data.headingEyebrow}</span>
+            )}
+            <h1 className="display-3 fw-medium mb-3">
+              {data.headingLeft}
+              <span className="text-gradient">{data.headingRight}</span>
+            </h1>
+            <p className="about-text">{data.description}</p>
+          </div>
+
+          {/* Right: Image */}
+          <div className="col-12 col-xl-6 text-center order-2 order-xl-2">
+            <Image
+              src={data.image}
+              alt="About Me"
+              className="about-image"
+              width={560}
+              height={560}
+              priority
+            />
+          </div>
         </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
 
 export default Testimonial;

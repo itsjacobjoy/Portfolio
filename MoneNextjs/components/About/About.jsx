@@ -1,67 +1,107 @@
-import React from 'react'
-import Image from 'next/image'
-import { aboutData } from './AboutData';
-import Link from 'next/link';
+import React, { useState, useRef, useEffect } from 'react';
+import { featuredVideos } from './AboutData';
 
 const About = () => {
-    return (
-        <div className="container">
-            <div className="row g-4 g-md-5">
-                <div className="col-12 col-lg-4 order-lg-2 text-center">
-                    {/* Hero Avatar */}
-                    <div className="hero-avatar">
-                        <Image src={aboutData.mainData.heroAvatar} alt="hero avatar" placeholder="blur" />
-                    </div>
-                    {/* end Hero Avatar */}
-                </div>
-                <div className="col-12 col-lg-4 order-lg-1">
-                    <div className="row g-4 g-lg-5">
-                        <div className="col-12 col-md-4 col-lg-12">
-                            <h6 className="sm-heading">Biography</h6>
-                            <p>{aboutData.mainData.biography}</p>
-                        </div>
-                        <div className="col-6 col-md-4 col-lg-12">
-                            <h6 className="sm-heading">Skills</h6>
-                            <ul className="list-inline-dot">
-                                {aboutData.skills.map((item, index) => (
-                                    <li key={index}>{item.name}</li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="col-6 col-md-4 col-lg-12">
-                            <h6 className="sm-heading">Connect</h6>
-                            <ul className="list-inline">
-                                {aboutData.connect.map((item, index) => (
-                                    <li key={index}>
-                                        <Link className="button-circle button-circle-sm" href={item.url} aria-label="Social media link">
-                                            <i className={item.bootstrapIcon}></i>
-                                            <i className={item.bootstrapIcon}></i>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div> {/* end row(inner) */}
-                </div>
-                <div className="col-12 col-md-12 col-lg-4 order-lg-3 text-lg-end">
-                    <div className="row g-4 g-lg-5">
-                        <div className="col-4 col-lg-12">
-                            <h6 className="sm-heading">Projects Done</h6>
-                            <h1 className="fw-light display-4 mb-0 line-height-110">{aboutData.mainData.projectsDone}</h1>
-                        </div>
-                        <div className="col-4 col-lg-12">
-                            <h6 className="sm-heading">Years of Experience</h6>
-                            <h1 className="fw-light display-4 mb-0 line-height-110">{aboutData.mainData.yearsOfExperience}+</h1>
-                        </div>
-                        <div className="col-4 col-lg-12">
-                            <h6 className="sm-heading">Worldwide Clients</h6>
-                            <h1 className="fw-light display-4 mb-0 line-height-110">{aboutData.mainData.worldwideClients}</h1>
-                        </div>
-                    </div> {/* end row(inner) */}
-                </div>
-            </div> {/* end row */}
-        </div>
-    )
-}
+  const [currentVideo, setCurrentVideo] = useState(featuredVideos[0]);
+  const videoRef = useRef(null);
 
-export default About
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+
+    // reset the video when a new one is selected
+    el.load();
+  }, [currentVideo]);
+
+  const handleVideoSelect = (video) => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+    setCurrentVideo(video);
+  };
+
+  // Play + unmute when hovering over the video
+  const handleVideoEnter = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = false;
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  // Pause + mute when leaving the video
+  const handleVideoLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.muted = true;
+    }
+  };
+
+  return (
+    <section className="featured-videos" id="featured">
+      <div className="container">
+        <h2 className="section-title">Featured Videos</h2>
+
+        <div className="featured-video-container">
+          {/* Main video player + title */}
+          <div
+            className="main-video"
+            onMouseEnter={handleVideoEnter}
+            onMouseLeave={handleVideoLeave}
+          >
+            <div className="player">
+              <video
+                key={currentVideo.id}
+                ref={videoRef}
+                loop
+                playsInline
+                muted
+                poster={currentVideo.poster}
+                preload="metadata"
+              >
+                <source
+                  key={currentVideo.src}
+                  src={currentVideo.src}
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+
+            <div className="main-info">
+              <h3>{currentVideo.title}</h3>
+            </div>
+          </div>
+
+          {/* Video playlist */}
+          <div className="video-playlist">
+            {featuredVideos.map((video, index) => (
+              <div
+                key={index}
+                className={`playlist-item ${
+                  currentVideo.id === video.id ? 'active' : ''
+                }`}
+                onClick={() => handleVideoSelect(video)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) =>
+                  e.key === 'Enter' ? handleVideoSelect(video) : null
+                }
+                aria-selected={currentVideo.id === video.id}
+              >
+                <div className="thumbnail">
+                  <img src={video.poster} alt={video.title} />
+                </div>
+                <div className="video-info">
+                  <h4>{video.title}</h4>
+                  <p>{video.duration}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default About;

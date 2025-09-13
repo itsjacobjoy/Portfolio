@@ -8,6 +8,7 @@ import Head from 'next/head'
 import { mainData } from '@/lib/data'
 
 
+
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = React.useState(false);
 
@@ -31,8 +32,7 @@ export default function App({ Component, pageProps }) {
 
           <Component {...pageProps} />
 
-          {/* Footer */}
-          <Footer />
+          
 
           {/* Scroll To Top */}
           <ScrollToTop />

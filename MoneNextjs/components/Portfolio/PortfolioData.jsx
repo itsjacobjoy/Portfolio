@@ -1,94 +1,33 @@
-import PortfolioImg from '@/public/images/portfolio-img.jpg';
-import MainImage from '@/public/images/blog-img-wide.jpg';
-
 export const portfolioData = {
-    mainData: {
-        title: "Portfolio",
-        title2: "Recent",
-        title2Span: "Works",
-        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
+  // Eyebrow + main heading text (reuses your existing heading styles)
+  mainData: {
+    title: 'Use Cases',          // small grey eyebrow
+    title2: 'Why You Should',               // left part of H1
+    title2Span: 'Hire Me',         // gradient span (matches screenshot style)
+    description: 'Practical ways brands can deploy AI media today.'
+  },
+
+  // Four cards: title shown by default, description on hover
+  useCases: [
+    {
+      title: 'Product Ads & Launch Promos',
+      description:
+        'Turn concepts into high-end commercials without full shoots — iterate fast, test creatives, and ship more variations.'
     },
-    projects: [
-        {
-            title: 'Project Title Here',
-            slug: 'first',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit',
-            services: [
-                { name: 'List item' },
-                { name: 'List item' },
-            ],
-            client: 'FlaTheme',
-            projectLink: {
-                title: 'www.flatheme.net',
-                url: 'https://www.flatheme.net'
-            },
-            duration: '121 hours',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            mainImage: PortfolioImg,
-            mainImageWide: MainImage,
-            images: [
-                { image: PortfolioImg },
-                { image: PortfolioImg },
-            ],
-            categories: [
-                { name: 'Category' },
-                { name: 'Category' },
-                { name: 'Category' }
-            ],
-        },
-        {
-            title: 'Project Title Here',
-            slug: 'second',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit',
-            services: [
-                { name: 'List item' },
-                { name: 'List item' },
-            ],
-            client: 'FlaTheme',
-            projectLink: {
-                title: 'www.flatheme.net',
-                url: 'https://www.flatheme.net'
-            },
-            duration: '121 hours',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            mainImage: PortfolioImg,
-            mainImageWide: MainImage,
-            images: [
-                { image: PortfolioImg },
-                { image: PortfolioImg },
-            ],
-            categories: [
-                { name: 'Category' },
-                { name: 'Category' },
-                { name: 'Category' }
-            ],
-        },
-        {
-            title: 'Project Title Here',
-            slug: 'third',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit',
-            services: [
-                { name: 'List item' },
-                { name: 'List item' },
-            ],
-            client: 'FlaTheme',
-            projectLink: {
-                title: 'www.flatheme.net',
-                url: 'https://www.flatheme.net'
-            },
-            duration: '121 hours',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            mainImage: PortfolioImg,
-            mainImageWide: MainImage,
-            images: [
-                { image: PortfolioImg },
-                { image: PortfolioImg },
-            ],
-            categories: [
-                { name: 'Category' },
-                { name: 'Category' },
-                { name: 'Category' }
-            ],
-        },
-    ]
+    {
+      title: 'Social-First Brand Storytelling',
+      description:
+        'Short vertical videos and UGC-style assets tuned for TikTok, Reels, and Shorts — quick to produce, easy to localize.'
+    },
+    {
+      title: 'Real Estate & Architecture Previews',
+      description:
+        'Cinematic walkthroughs, mood boards, and before/after visualizations that help sell spaces and narratives early.'
+    },
+    {
+      title: 'Localization & Versioning at Scale',
+      description:
+        'Auto-produce multi-language, region-specific variants (voice, text, visuals) to launch consistent global campaigns.'
+    }
+  ]
 };

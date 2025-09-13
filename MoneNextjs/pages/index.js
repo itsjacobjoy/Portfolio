@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { mainData } from '@/lib/data'
-import { About, Awards, Blog, Clients, Contact, Hero, Portfolio, Services, Testimonial } from '@/components'
+import { About, Awards, Blog, Contact, Hero, Portfolio, Services, Testimonial } from '@/components'
 
 export default function Home() {
     return (
@@ -13,20 +13,18 @@ export default function Home() {
             <main>
                 {/* Hero section */}
                 <Hero />
+                 {/* Testimonial section */}
+                <Testimonial />
                 {/* About section */}
                 <About />
                 {/* Services section */}
                 <Services />
-                {/* Clients section */}
-                <Clients />
                 {/* Portfolio section */}
                 <Portfolio />
-                {/* Awards section */}
-                <Awards />
-                {/* Testimonial section */}
-                <Testimonial />
-                {/* Blog section */}
-                <Blog />
+                {/* Awards section
+                <Awards /> */}
+                {/* Blog section
+                <Blog /> */}
                 {/* Contact section */}
                 <Contact />
                 {/* Footer section */}

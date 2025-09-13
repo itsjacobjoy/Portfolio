@@ -24,7 +24,7 @@
 @import "elements/clients";
 @import "elements/fancy-box";
 @import "elements/lightbox";
-@import "elements/map";
+// @import "elements/map";
 @import "elements/services";
 @import "elements/testimonial";
 
@@ -45,3 +45,14 @@
 // Custom Styles //
 //
 @import "helpers/custom";
+
+
+// @import "components/slideshow";
+
+@import "components/hero";
+
+@import "components/featured-videos";
+
+@import "components/services";
+
+@import "components/contact";

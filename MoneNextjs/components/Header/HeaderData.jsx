@@ -1,3 +1,3 @@
 export const headerData = {
-    logo: 'Mone',
+    logo: '',
 };

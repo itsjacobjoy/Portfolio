@@ -1,9 +1,10 @@
 export const contactData = {
-    mainData: {
-        title: "Clients",
-        title2: "Let's",
-        title2Span: "Talk",
-        phone: "+123 456 7890",
-        email: "contact@flatheme.net",
-    }
+  mainData: {
+    title: "Contact",
+    title2: "Let's",
+    title2Span: "Talk",
+    phone: "+91 8217086511",                        // your phone number
+    email: "jacobjoy259@gmail.com",               // your email
+    linkedin: "https://www.linkedin.com/in/jacob-joy-99bb98205" // your LinkedIn URL
+  }
 };

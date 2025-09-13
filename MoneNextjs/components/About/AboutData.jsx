@@ -1,42 +1,44 @@
-import HeroAvatar from '@/public/images/hero-avatar.jpg';
-
-export const aboutData = {
-    mainData: {
-        heroAvatar: HeroAvatar,
-        biography: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-        projectsDone: "432",
-        yearsOfExperience: "13",
-        worldwideClients: "900",
-    },
-    skills: [
-        {
-            name: 'Web Development',
-        },
-        {
-            name: 'UI & UX Design',
-        },
-        {
-            name: 'Marketing',
-        },
-        {
-            name: 'SEO',
-        },
-        {
-            name: 'Management',
-        },
-    ],
-    connect: [
-        {
-            url: '#',
-            bootstrapIcon: 'bi bi-facebook',
-        },
-        {
-            url: '#',
-            bootstrapIcon: 'bi bi-twitter',
-        },
-        {
-            url: '#',
-            bootstrapIcon: 'bi bi-instagram',
-        },
-    ]
-};
+export const featuredVideos = [
+  {
+    id: 1,
+    title: 'Shoe Ad',
+    src: '/Output Videos/Shoe Test 1.mp4',
+    poster: '/Output Images/Shoe_video.png',
+    duration: '0:20'
+  },
+  {
+    id: 2,
+    title: 'Fashion Ad',
+    src: '/Output Videos/Jacket Ad.mp4',
+    poster: '/Output Images/Jacker_video.jpg',
+    duration: '0:19'
+  },
+  {
+    id: 3,
+    title: 'Haircare Promo',
+    src: '/Output Videos/WestSide Video.mp4',
+    poster: '/Output Images/Westside_video.jpg',
+    duration: '0:25'
+  },
+  {
+    id: 4,
+    title: 'Watch Ad',
+    src: '/Output Videos/Watch Test 2.mp4',
+    poster: '/Output Images/Watch_video.png',
+    duration: '0:35'
+  }, 
+  {
+    id: 5,
+    title: 'Other products',
+    src: '/Output Videos/Frooti-FMCG.mp4',
+    poster: '/Output Images/Frooti_video.png',
+    duration: '00:21'
+  }, 
+  {
+    id: 6,
+    title: 'Real Estate StoryTelling',
+    src: '/Output Videos/Merlin video 3 (16_9).mp4',
+    poster: '/Output Images/Merlin_video.jpg',
+    duration: '01:05'
+  }
+];
