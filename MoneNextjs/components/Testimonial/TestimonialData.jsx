@@ -1,4 +1,4 @@
-import AboutPic from '@/public/Output Images/About_Me.png'// replace with your actual image
+import AboutPic from '@/public/Output-Images/About_Me.png'// replace with your actual image
 
 export const testimonialData = {
   mainData: {
