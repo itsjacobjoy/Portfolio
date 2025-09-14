@@ -7,7 +7,18 @@ import '@/styles/all.min.css'
 import Head from 'next/head'
 import { mainData } from '@/lib/data'
 
+// ✅ Import fonts from next/font/google
+import { Outfit, Open_Sans } from 'next/font/google'
 
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['200', '300', '400', '500', '600', '700', '800']
+})
+
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700']
+})
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = React.useState(false);
