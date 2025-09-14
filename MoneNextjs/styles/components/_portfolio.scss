@@ -1,11 +1,11 @@
 //
-// Portfolio
+// Portfolio (Use Cases)
 //
 .portfolio-box {
   .portfolio-img {
     position: relative;
     overflow: hidden;
-    @include transform(translate3d(0,0,0));
+    @include transform(translate3d(0, 0, 0));
     border-radius: 1em;
 
     a {
@@ -89,10 +89,20 @@
    Use Cases (cards grid)
    =========================== */
 
+#use-cases {
+  padding: 6rem 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 8, 30, 1) 0%,    /* dark navy */
+    rgba(0, 0, 0, 1) 100%    /* black */
+  );
+}
+
 .usecases-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+  margin-top: 2rem;
 }
 
 .usecase-card {
@@ -127,11 +137,14 @@
 .usecase-front {
   opacity: 1;
   color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .usecase-back {
   opacity: 0;
   color: #fff;
+  font-size: 1rem;
   background: linear-gradient(
     180deg,
     rgba(123, 19, 255, 0.18) 0%,

@@ -1,3 +1,7 @@
+/* ===========================
+   Featured Videos Section
+   =========================== */
+
 .featured-videos {
   padding: 6rem 0;
   background: linear-gradient(
@@ -23,59 +27,101 @@
     margin: 0 auto;
   }
 
-  /* MAIN VIDEO + RIGHT-SIDE TITLE */
-.main-video {
-  display: flex;
-  align-items: center;     /* vertical align: center */
-  justify-content: center; /* center the video+title block */
-  gap: 2rem;
-  width: auto;             /* let content define width */
-  max-width: 1000px;
-  margin: 0 auto 1rem;     /* auto centers horizontally, 1rem bottom gap */
-  cursor: pointer;
+  /* ===========================
+     Main player + right title
+     =========================== */
+  .main-video {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: auto;             /* let content define width */
+    max-width: 1100px;
+    margin: 0 auto 1.25rem;  /* centers and adds a little bottom gap */
+    cursor: default;
 
-  .player {
-    flex: 0 0 60%;         /* video takes ~60% of row */
-    video {
-      width: 100%;
-      border-radius: 8px;
-      background: #000;
-      display: block;
+    .player {
+      position: relative;
+      flex: 0 0 65%;         /* video takes ~65% of row */
+      border-radius: 14px;
+      overflow: hidden;      /* clip overlay to rounded corners */
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+
+      /* Blend letterbox bars with the background (subtle vignette) */
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          120% 120% at 50% 50%,
+          rgba(0,0,0,0) 55%,
+          rgba(0,0,0,0.35) 100%
+        );
+        z-index: 1;
+      }
+
+      video {
+        display: block;
+        width: 100%;
+        height: auto;        /* keep the encoded aspect ratio */
+        background: #000;    /* native player chrome uses this */
+        border-radius: 14px;
+      }
+    }
+
+    .main-info {
+      flex: 0 0 360px;       /* fixed space for the title block */
+      text-align: center;
+
+      h3 {
+        color: #fff;
+        font-size: 3rem;
+        line-height: 1.2;
+        margin: 0;
+      }
     }
   }
 
-  .main-info {
-    flex: 0 0 350px;       /* fixed width for title area */
-    text-align: center;
-    h3 {
-      color: #fff;
-      font-size: 3.0rem;
-      line-height: 1.2;
-      margin: 0;
-    }
-  }
-}
-
+  /* ===========================
+     Channel strip (one line)
+     =========================== */
   .video-playlist {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;        /* keep in one row */
     gap: 1rem;
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
+    padding: 0 1rem 0.5rem;
+    overflow-x: auto;         /* horizontal scroll if overflow */
+    overflow-y: hidden;
+    scroll-behavior: smooth;  /* nice feel on desktop */
+    -webkit-overflow-scrolling: touch;
+
+    /* Thin scrollbar styling */
+    scrollbar-width: thin;                       /* Firefox */
+    scrollbar-color: rgba(255,255,255,.35) transparent;
+
+    &::-webkit-scrollbar { height: 8px; }        /* WebKit */
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,.35);
+      border-radius: 4px;
+    }
   }
 
   .playlist-item {
-    width: calc(16.666% - 1rem);
-    max-width: 180px;
+    flex: 0 0 auto;                /* no shrink, no grow */
+    width: 220px;                  /* fixed card width */
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.25s ease, background 0.25s ease;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.22);
 
     &:hover {
-      transform: scale(1.05);
-      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.10);
     }
 
     &.active {
@@ -86,51 +132,90 @@
   .thumbnail {
     position: relative;
     width: 100%;
-    padding-top: 56.25%;
+    padding-top: 56.25%;          /* 16:9 aspect ratio thumbnail */
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+
     img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 8px 8px 0 0;
+      display: block;
     }
   }
 
   .video-info {
-    padding: 0.5rem;
+    padding: 0.6rem 0.7rem 0.75rem;
     color: #fff;
-    h4 { font-size: 0.9rem; margin-bottom: 0.25rem; }
-    p  { font-size: 0.8rem; opacity: 0.7; }
+
+    h4 {
+      font-size: 0.95rem;
+      margin: 0 0 0.25rem 0;
+      white-space: nowrap;         /* keep one line title */
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    p {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      margin: 0;
+    }
   }
 }
 
-/* RESPONSIVE: stack on smaller screens */
+/* ===========================
+   Responsive
+   =========================== */
 @media (max-width: 1200px) {
   .featured-videos {
-    .main-video { width: 70%; }
-    .playlist-item { width: calc(20% - 1rem); }
+    .main-video { max-width: 1000px; }
   }
 }
+
 @media (max-width: 992px) {
   .featured-videos {
     .main-video {
-      width: 80%;
-      flex-direction: column;    /* stack video and title on tablet */
-      .main-info { width: 100%; margin-top: 0.75rem; }
+      flex-direction: column;     /* stack title under video */
+      gap: 1rem;
+
+      .player { width: 92%; }
+      .main-info { width: 100%; }
+      .main-info h3 { font-size: 2.25rem; }
     }
-    .playlist-item { width: calc(25% - 1rem); }
   }
 }
+
 @media (max-width: 768px) {
   .featured-videos {
-    .main-video { width: 90%; }
-    .playlist-item { width: calc(33.333% - 1rem); }
+    .section-title { font-size: 2rem; }
+
+    .main-video {
+      .player { width: 95%; }
+      .main-info h3 { font-size: 2rem; }
+    }
+
+    .video-playlist {
+      gap: 0.75rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    .playlist-item { width: 200px; }
   }
 }
+
 @media (max-width: 576px) {
   .featured-videos {
-    .main-video { width: 95%; }
-    .playlist-item { width: calc(50% - 1rem); }
+    padding: 4.5rem 0;
+
+    .main-video {
+      .player { width: 100%; border-radius: 12px; }
+      .main-info h3 { font-size: 1.75rem; }
+    }
+
+    .playlist-item { width: 180px; }
   }
 }

@@ -1,40 +1,84 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { featuredVideos } from './AboutData';
 
 const About = () => {
   const [currentVideo, setCurrentVideo] = useState(featuredVideos[0]);
   const videoRef = useRef(null);
 
-  useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
+  // Remember scroll before/after fullscreen
+  const scrollBeforeFS = useRef(0);
 
-    // reset the video when a new one is selected
-    el.load();
+  // Detect touch devices (no hover on mobile/tablet)
+  const isTouch = useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    try {
+      return window.matchMedia('(hover: none)').matches;
+    } catch {
+      return false;
+    }
+  }, []);
+
+  // Load the selected video but do NOT autoplay it
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    try {
+      v.pause();
+      v.muted = true;   // default muted unless hovered
+      v.load();         // commit new <source>
+    } catch (_) {}
   }, [currentVideo]);
 
+  // Hover sound only (desktop)
+  const handleMouseEnter = () => {
+    if (isTouch) return;
+    const v = videoRef.current;
+    if (v) v.muted = false;
+  };
+  const handleMouseLeave = () => {
+    if (isTouch) return;
+    const v = videoRef.current;
+    if (v) v.muted = true;
+  };
+
   const handleVideoSelect = (video) => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
+    const v = videoRef.current;
+    if (v) v.pause();
     setCurrentVideo(video);
   };
 
-  // Play + unmute when hovering over the video
-  const handleVideoEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = false;
-      videoRef.current.play().catch(() => {});
-    }
-  };
+  // Keep scroll position when entering/exiting fullscreen
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
 
-  // Pause + mute when leaving the video
-  const handleVideoLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.muted = true;
-    }
-  };
+    const onFSChange = () => {
+      const isFS =
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement;
+
+      if (isFS) {
+        // entering fullscreen — remember current scroll
+        scrollBeforeFS.current = window.scrollY || window.pageYOffset || 0;
+      } else {
+        // exiting fullscreen — restore scroll
+        window.scrollTo({ top: scrollBeforeFS.current, behavior: 'instant' in window ? 'instant' : 'auto' });
+      }
+    };
+
+    document.addEventListener('fullscreenchange', onFSChange);
+    document.addEventListener('webkitfullscreenchange', onFSChange);
+    document.addEventListener('mozfullscreenchange', onFSChange);
+    document.addEventListener('MSFullscreenChange', onFSChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', onFSChange);
+      document.removeEventListener('webkitfullscreenchange', onFSChange);
+      document.removeEventListener('mozfullscreenchange', onFSChange);
+      document.removeEventListener('MSFullscreenChange', onFSChange);
+    };
+  }, []);
 
   return (
     <section className="featured-videos" id="featured">
@@ -43,20 +87,21 @@ const About = () => {
 
         <div className="featured-video-container">
           {/* Main video player + title */}
-          <div
-            className="main-video"
-            onMouseEnter={handleVideoEnter}
-            onMouseLeave={handleVideoLeave}
-          >
-            <div className="player">
+          <div className="main-video">
+            <div
+              className="player"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               <video
                 key={currentVideo.id}
                 ref={videoRef}
-                loop
+                controls
                 playsInline
+                loop
                 muted
-                poster={currentVideo.poster}
                 preload="metadata"
+                poster={currentVideo.poster}
               >
                 <source
                   key={currentVideo.src}
@@ -74,29 +119,28 @@ const About = () => {
 
           {/* Video playlist */}
           <div className="video-playlist">
-            {featuredVideos.map((video, index) => (
-              <div
-                key={index}
-                className={`playlist-item ${
-                  currentVideo.id === video.id ? 'active' : ''
-                }`}
-                onClick={() => handleVideoSelect(video)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) =>
-                  e.key === 'Enter' ? handleVideoSelect(video) : null
-                }
-                aria-selected={currentVideo.id === video.id}
-              >
-                <div className="thumbnail">
-                  <img src={video.poster} alt={video.title} />
+            {featuredVideos.map((video) => {
+              const active = currentVideo.id === video.id;
+              return (
+                <div
+                  key={video.id}
+                  className={`playlist-item ${active ? 'active' : ''}`}
+                  onClick={() => handleVideoSelect(video)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => (e.key === 'Enter' ? handleVideoSelect(video) : null)}
+                  aria-pressed={active}
+                >
+                  <div className="thumbnail">
+                    <img src={video.poster} alt={video.title} />
+                  </div>
+                  <div className="video-info">
+                    <h4>{video.title}</h4>
+                    <p>{video.duration}</p>
+                  </div>
                 </div>
-                <div className="video-info">
-                  <h4>{video.title}</h4>
-                  <p>{video.duration}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

@@ -31,10 +31,11 @@ const Header = () => {
             <button
               type="button"
               onClick={toggleMenu}
-              className="button button-sm button-dot button-white"
+              className="button button-sm button-white"
             >
-              <span data-text="Menu">Menu</span>
+              Menu
             </button>
+
 
             {/* Menu */}
             <div ref={menuRef} className={`nav-box ${isMenuOpen ? 'show' : ''}`}>

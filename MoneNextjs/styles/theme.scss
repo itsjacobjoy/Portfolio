@@ -1,16 +1,16 @@
 //
-// Google Fonts //
+// Google Fonts
+// (Using next/font in _app.js — so no @import here)
 //
-// @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap');
 
 //
-// Helpers //
+// Helpers
 //
 @import "helpers/variables";
 @import "helpers/mixins";
 
 //
-// Basic //
+// Basic
 //
 @import "basic/base";
 @import "basic/form";
@@ -18,41 +18,129 @@
 @import "basic/typography";
 
 //
-// Elements //
+// Elements
 //
 @import "elements/button";
 @import "elements/clients";
 @import "elements/fancy-box";
 @import "elements/lightbox";
-// @import "elements/map";
+@import "elements/map";
 @import "elements/services";
 @import "elements/testimonial";
 
 //
-// Components //
+// Components
 //
 @import "components/blog";
 @import "components/header-menu";
 @import "components/portfolio";
 @import "components/preloader";
+@import "components/hero";
+@import "components/featured-videos";
+@import "components/services";
 
 //
-// Utilities //
+// Utilities
 //
 @import "helpers/utilities";
 
 //
-// Custom Styles //
+// Custom Styles (additions & overrides live here)
 //
-@import "helpers/custom";
 
+// ===== Mobile-friendly foundations =====
 
-// @import "components/slideshow";
+// Fluid section spacing
+.section,
+.section-box,
+.gallery-section,
+.featured-videos,
+#use-cases,
+#about,
+#contact {
+  padding: clamp(3rem, 6vw, 6rem) 0;
+}
 
-@import "components/hero";
+// Container breathing room
+.container {
+  padding-left: clamp(16px, 4vw, 32px);
+  padding-right: clamp(16px, 4vw, 32px);
+}
 
-@import "components/featured-videos";
+// Fluid typography
+h1 { font-size: clamp(2rem, 5.5vw, 3.5rem); line-height: 1.12; }
+h2 { font-size: clamp(1.6rem, 4.5vw, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 3.6vw, 1.75rem); }
+p, li { font-size: clamp(0.98rem, 2.7vw, 1.05rem); line-height: 1.65; }
 
-@import "components/services";
+// Tap targets
+.button,
+.btn,
+.button-dot,
+.button-circle {
+  min-height: 44px; // iOS/Google recommended
+}
 
-@import "components/contact";
+// Respect reduced motion
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+// ===== Header/menu small-screen polish =====
+.header .header-nav .button {
+  min-height: 44px;
+  padding: 0 16px;
+}
+.header .nav-box .nav-link {
+  padding: 10px 0; // larger tap area
+  display: inline-block;
+}
+
+// ===== Featured Videos (About) small-screen tweaks =====
+@media (max-width: 992px) {
+  .featured-videos {
+    .main-video {
+      flex-direction: column; // stack player + title on tablets
+      gap: 0.9rem;
+      .main-info { width: 100%; margin-top: 0.25rem; }
+      .main-info h3 { font-size: clamp(1.35rem, 4.8vw, 2rem); }
+    }
+    .video-playlist { gap: 0.85rem; }
+    .playlist-item { width: calc(25% - 0.85rem); }
+  }
+}
+@media (max-width: 768px) {
+  .featured-videos {
+    .playlist-item { width: calc(33.333% - 0.85rem); }
+  }
+}
+@media (max-width: 576px) {
+  .featured-videos {
+    .main-video { gap: 0.75rem; }
+    .video-playlist { gap: 0.75rem; }
+    .playlist-item { width: calc(50% - 0.75rem); max-width: none; } // 2 per row
+  }
+}
+
+// ===== Featured Images (Gallery) small-screen tweaks =====
+@media (max-width: 768px) {
+  .gallery-section {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .image-wrapper { animation: breathe 12s ease-in-out infinite; }
+    .gallery-item.elevated { transform: translateY(0); } // flatten stacks
+  }
+}
+@media (max-width: 480px) {
+  .gallery-section {
+    .gallery-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+  }
+}
+
+// ===== Use Cases (Portfolio cards) small-screen tweaks =====
+@media (max-width: 992px) {
+  .usecases-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 576px) {
+  .usecases-grid { grid-template-columns: 1fr; }
+  .usecase-card { min-height: 150px; }
+}

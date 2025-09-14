@@ -1,11 +1,9 @@
 .gallery-section {
   padding: 6rem 0;
   background: linear-gradient(
-    90deg,
-    rgb(0, 0, 0) 0%,
-    rgba(0, 12, 45, 1) 35%,
-    rgba(0, 12, 45, 1) 65%,
-    rgb(0, 0, 0) 100%
+    180deg,
+    rgba(0, 8, 30, 1) 0%,    /* dark navy */
+    rgba(0, 0, 0, 1) 100%    /* black */
   );
 
   .section-title {
@@ -38,7 +36,7 @@
     padding-bottom: 100%;
     overflow: hidden;
     border-radius: 8px;
-    opacity: 0.5;
+    opacity: 0.6;
     animation: breathe 15s ease-in-out infinite;
     transition: all 12s ease;
     transform-origin: center;
@@ -61,11 +59,11 @@
   @keyframes breathe {
     0%, 100% {
       transform: scale(1);
-      opacity: 0.5;
+      opacity: 0.6;
     }
     50% {
       transform: scale(1.02);
-      opacity: 0.7;
+      opacity: 0.75;
     }
   }
 
@@ -73,12 +71,10 @@
     0%, 100% {
       transform: scale(1.02);
       opacity: 1;
-      transition: all 1s ease-in-out;
     }
     50% {
       transform: scale(1.05);
       opacity: 1;
-      transition: all 1s ease-in-out;
     }
   }
 }
@@ -88,7 +84,7 @@
     .gallery-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .gallery-item.elevated {
       transform: translateY(0);
     }
