@@ -41,9 +41,10 @@ export default function App({ Component, pageProps }) {
           {/* Header */}
           <Header />
 
-          <Component {...pageProps} />
-
-          
+          {/* ✅ Fonts applied globally here */}
+          <main className={`${outfit.className} ${openSans.className}`}>
+            <Component {...pageProps} />
+          </main>
 
           {/* Scroll To Top */}
           <ScrollToTop />
