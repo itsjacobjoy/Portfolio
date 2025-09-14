@@ -1,7 +1,7 @@
 import Favicon from '@/public/images/favicon.png';
 
 export const mainData = {
-    websiteTitle: 'Mone - Personal Portfolio Template',
+    websiteTitle: 'Jacob - Portfolio',
     description: 'Personal Portfolio Template',
     keywords: 'mone, portfolio, vCard',
     favicon: Favicon,
