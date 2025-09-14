@@ -16,7 +16,7 @@ export const featuredVideos = [
   {
     id: 3,
     title: 'Haircare Promo',
-    src: '/Output-Videos/WestSide Video.mp4',
+    src: '/Output-Videos/Westside Video.mp4',
     poster: '/Output-Images/Westside_video.jpg',
     duration: '0:25'
   },
