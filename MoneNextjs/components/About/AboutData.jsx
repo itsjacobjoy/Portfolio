@@ -22,10 +22,10 @@ export const featuredVideos = [
   },
   {
     id: 4,
-    title: 'Watch Ad',
-    src: '/Output-Videos/Watch Test 2.mp4',
-    poster: '/Output-Images/Watch_video.png',
-    duration: '0:35'
+    title: 'Automotive Filmmaking',
+    src: '/Output-Videos/Mustang_video_2.mp4',
+    poster: '/Output-Images/Mustang_image.png',
+    duration: '0:55'
   }, 
   {
     id: 5,
@@ -37,8 +37,15 @@ export const featuredVideos = [
   {
     id: 6,
     title: 'Real Estate StoryTelling',
-    src: '/Output-Videos/Merlin video 3 (16_9).mp4',
+    // src: '/Output-Videos/Real_Estate_video.mp4',
     poster: '/Output-Images/Merlin_video.jpg',
     duration: '01:05'
+  }, 
+  {
+    id: 7,
+    title: 'Watch Ad',
+    src: '/Output-Videos/Watch Test 2.mp4',
+    poster: '/Output-Images/Watch_video.png',
+    duration: '0:35'
   }
 ];
