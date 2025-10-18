@@ -26,8 +26,8 @@
   /* MAIN VIDEO + RIGHT-SIDE TITLE */
   .main-video {
     display: flex;
-    align-items: center;     /* vertical align: center */
-    justify-content: center; /* center the video+title block */
+    align-items: center;
+    justify-content: center;
     gap: 2rem;
     width: auto;
     max-width: 1000px;
@@ -62,16 +62,38 @@
 
   .video-playlist {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: flex-start;
     gap: 1rem;
     width: 90%;
     max-width: 1200px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 1rem 0;
+    scroll-behavior: smooth;
+    
+    /* Custom scrollbar styling */
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
   }
 
   .playlist-item {
-    width: calc(16.666% - 1rem);
-    max-width: 180px;
+    flex: 0 0 180px;
+    min-width: 180px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     cursor: pointer;
@@ -90,7 +112,7 @@
   .thumbnail {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
+    padding-top: 56.25%;
 
     img {
       position: absolute;
@@ -118,14 +140,15 @@
   }
 }
 
-/* RESPONSIVE: stack on smaller screens */
+/* RESPONSIVE: adjust video size on smaller screens */
 @media (max-width: 1200px) {
   .featured-videos {
     .main-video {
       width: 85%;
     }
     .playlist-item {
-      width: calc(20% - 1rem);
+      flex: 0 0 160px;
+      min-width: 160px;
     }
   }
 }
@@ -134,14 +157,15 @@
   .featured-videos {
     .main-video {
       width: 90%;
-      flex-direction: column; /* stack video and title */
+      flex-direction: column;
       .main-info {
         width: 100%;
         margin-top: 1rem;
       }
     }
     .playlist-item {
-      width: calc(25% - 1rem);
+      flex: 0 0 150px;
+      min-width: 150px;
     }
   }
 }
@@ -151,8 +175,12 @@
     .main-video {
       width: 95%;
     }
+    .video-playlist {
+      width: 95%;
+    }
     .playlist-item {
-      width: calc(33.333% - 1rem);
+      flex: 0 0 140px;
+      min-width: 140px;
     }
   }
 }
@@ -162,8 +190,13 @@
     .main-video {
       width: 100%;
     }
+    .video-playlist {
+      width: 100%;
+      padding: 1rem 0.5rem;
+    }
     .playlist-item {
-      width: calc(50% - 1rem);
+      flex: 0 0 130px;
+      min-width: 130px;
     }
   }
 }
